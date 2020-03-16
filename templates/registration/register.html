@@ -1,0 +1,21 @@
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>register.html</title>
+  </head>
+  <body>
+    {% if form.errors %}
+    {{ form.errors }}
+    {% endif %}<br>
+
+    <form class="card pt-3" action="." method="post">{% csrf_token %}
+      {{ form.username }}
+      {{ form.password1 }}
+      {{ form.password2 }}
+      <input type="submit" class="btn btn-info" value="가입하기">
+    </form>
+  </body>
+</html>

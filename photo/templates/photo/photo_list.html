@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}photo_list.html{% endblock %}
+
+{% block content %}
+  <h1 class="display-3">사진 목록</h1>
+  <br>
+
+<div class="text-right">
+  <button type="button" class="btn btn-success"><i class="fas fa-edit" ></i>글쓰기</button>
+</div>
+<br>
+<div class="row">
+  {% for photo in photos %}
+  <div class="col-sm-4 text-center ">
+    <div class="card" style="width: 18rem;">
+      <img src="{{ photo.image.thumb_url }}" class="card-img-top" alt="">
+      <hr>
+        <div class="card-body">
+          <p class="card-text">{{ photo.description }}</p>
+          <h6 class="text-right small text-black-50">{{ photo.upload_dt }}</h6>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
