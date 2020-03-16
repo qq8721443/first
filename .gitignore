@@ -1,5 +1,4 @@
-# .gitignore
-### Django ###
+venv
 *.log
 *.pot
 *.pyc
