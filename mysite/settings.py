@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#!49!()y9a#umg00-xqctu+c13!r1i9t_xf_gjq75-w9c)z_4qm
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+#os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = '!49!()y9a#umg00-xqctu+c13!r1i9t_xf_gjq75-w9c)z_4qm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com','localhost', '127.0.0.1']
 
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,10 +88,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': os.environ['DATABASE_NAME'],
-        'USER': os.environ['DATABASE_USER'],
-        'PASSWORD': os.environ['DATABASE_PASSWORD'],
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'NAME': os.environ['DATABASE_NAME'],
+        #'USER': os.environ['DATABASE_USER'],
+        #'PASSWORD': os.environ['DATABASE_PASSWORD'],
     }
 }
 
@@ -167,6 +167,6 @@ CKEDITOR_CONFIGS = {
 }
 
 # Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#import dj_database_url
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
