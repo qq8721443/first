@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import DetailView, ListView, TemplateView, CreateView, UpdateView
+from django.views.generic import DetailView, ListView, TemplateView, CreateView, UpdateView, DeleteView
 from .models import Post
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -18,7 +18,7 @@ class PostLV(ListView):
 
 class PostCV(CreateView):
     model = Post
-    template_name = 'Post/post_form.html'
+    #template_name = 'Post/post_form.html' 그냥 자동으로 _form.html로 가는듯
     fields = ['title', 'description', 'context']
     success_url = reverse_lazy('post:post_list')
 
@@ -36,4 +36,8 @@ class PostCV(CreateView):
 class PostUV(UpdateView):
     model = Post
     fields = ['title', 'description', 'context']
+    success_url = reverse_lazy('post:post_list')
+
+class PostDelV(DeleteView):
+    model = Post
     success_url = reverse_lazy('post:post_list')
