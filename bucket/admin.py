@@ -5,4 +5,4 @@ from .models import Bucket
 
 @admin.register(Bucket)
 class BucketAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
+    list_display = ('id', 'title', 'content', 'owner')

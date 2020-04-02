@@ -15,22 +15,17 @@
 <body>
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-warning p-4">
+    <div class="p-4" style="background-color:#FFD8D8;">
       <h5 class="text-white h4">MENU BAR</h5>
       <!--<span class="text-muted">HOW CAN I USE THIS PLACE?</span>-->
       <div class="btn-group-lg" role="group" aria-label="Basic example">
-        <a href="{% url 'hub:main' %}"><button type="button" class="btn btn-success"><i class="fas fa-home" style="font-size:210%;"></i></button></a>
-        <a href="{% url 'post:post_list' %}"><button type="button" class="btn btn-success"><i class="fas fa-sticky-note" style="font-size:210%"></i></button></a>
-        <a href="{% url 'photo:photo_list' %}"><button type="button" class="btn btn-success"><i class="fas fa-camera-retro" style="font-size:210%"></i></button></a>
-        <button type="button" class="btn btn-success">4</button>
-        <button type="button" class="btn btn-success">5</button>
-        <button type="button" class="btn btn-success">6</button>
-        <button type="button" class="btn btn-success">7</button>
-        <button type="button" class="btn btn-success">8</button>
+        <a href="{% url 'hub:main' %}"><button type="button" class="btn btn-outline-light"><i class="fas fa-home" style="font-size:210%;"></i></button></a>
+        <a href="{% url 'post:post_list' %}"><button type="button" class="btn btn-outline-light"><i class="fas fa-sticky-note" style="font-size:210%"></i></button></a>
+        <a href="{% url 'photo:photo_list' %}"><button type="button" class="btn btn-outline-light"><i class="fas fa-camera-retro" style="font-size:210%"></i></button></a>
       </div>
     </div>
   </div>
-  <nav class="navbar navbar-dark bg-warning">
+  <nav class="navbar navbar-dark" style="background-color:#FFCECE;">
     <button class="navbar-toggler btn-outline-white" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>menu
     </button>
@@ -39,13 +34,11 @@
     {% if user.is_active %}
     <span class="navbar-text">
       <div class="dropdown">
-        <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {% firstof user.get_short_name user.get_username %}
         </button>
-        <div class="dropdown-menu bg-warning dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu dropdown-menu-right" style="background-color:#FFD8D8" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-black-50" href="{% url 'logout' %}">로그아웃</a>
-          <a class="dropdown-item text-black-50" href="#">Another action</a>
-          <a class="dropdown-item text-black-50" href="#">Something else here</a>
         </div>
       </div>
     </span>

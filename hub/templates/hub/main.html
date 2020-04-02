@@ -6,85 +6,73 @@
 {% block content %}
     <div class="row">
       <div class="col-sm text-center">
-
-        <h1 class="display-3 text-black">오늘은&nbsp;<script type="text/javascript">
-          var today = new Date();
-          var dateString = "2016-08-22";
-
-          var dateArray = dateString.split("-");
-
-          var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);
-
-          var betweenDay = (today.getTime() - dateObj.getTime())/1000/60/60/24;
-          betweenDay = Math.floor(betweenDay) + 1;
-          document.write(betweenDay);
-        </script>일째 되는 날입니다!</h1>
+          <h1 class="display-3 text-black">오늘은&nbsp;<script type="text/javascript">
+            var today = new Date();
+            var dateString = "2016-08-22";
+            var dateArray = dateString.split("-");
+            var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);
+            var betweenDay = (today.getTime() - dateObj.getTime())/1000/60/60/24;
+            betweenDay = Math.floor(betweenDay) + 1;
+            document.write(betweenDay);
+          </script>일째 되는 날입니다!</h1>
       </div>
     </div>
-    <br>
+
     <hr>
-    <br>
-    <div class="row">
-      <div class="col-sm-6 border text-center">
-        <br>
-        <div class="jumbotron">
-          <div class="media">
-            <img src="{{ photo_lists.first.image.thumb_url }}" class="align-self-center mr-3" alt="...">
-            <div class="media-body">
-              <h5 class="mt-0">Center-aligned media</h5>
-              <p>{{ photo_lists.first.description }}</p>
-            </div>
-          </div>
-          <!--<h1 class="display-4"><a href="{{ photo_lists.first.get_absolute_url }}">{{ photo_lists.first }}</a></h1>-->
-          <hr class="my-4">
-          <div class="media">
-            <div class="media-body">
-              <i class="fas fa-user-alt" style="font-size:200%"></i>
-              {{ photo_lists.first }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3 border">
-        AREA 2
-        <div class="jumbotron">
-          {{ buckets.first.title }}
-        </div>
-      </div>
-      <div class="col-sm-3 border">
-        AREA 3
-        <div class="jumbotron">
-          test
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="row ">
-      <div class="col-sm-6 border ">
-        AREA 4
-        {% for post in posts %}
-        <div class="row">
-          <div class="col">
-            <div class="jumbotron">
-              <div class="container">
-                <h5 class="mt-0"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5><h6 class="text-black-50">{{ photo_lists.first.upload_dt }}</h6>
-                <hr>
-                  <p class="lead">{{ post.context | safe}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
 
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-8">
+            <strong>POST</strong>
+          </div>
+          <div class="col-sm-4 text-center">
+            <a href="{% url 'post:post_list' %}">더보기</a>
+          </div>
+        </div>
+        <div class="content mt-2 mt-2 ">
+          <p>{{ posts.first }}</p>
+          <span>{{ posts.first.owner }}&nbsp;{{ posts.first.create_dt }}</span>
+          <p>{{ posts.first.context|safe }}</p>
+
+        </div>
       </div>
-      <div class="col-sm-6 border">
-        AREA 5
-        {% for photo_list in photo_lists %}
-        <div class="jumbotron">
-          {{ photo_list.description }}
+
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-8">
+            <strong>PHOTO</strong>
+          </div>
+          <div class="col-sm-4 text-center">
+            <a href="{% url 'photo:photo_list' %}">더보기</a>
+          </div>
+
+        </div>
+        <div class="content  mt-2 text-center">
+          <p>{{ photologs.first.name }}</p>
+          <span>{{ photologs.first.create_dt }}</span>
+          <p>{{ photologs.first.content }}</p>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-8">
+            <strong>BUCKETLIST</strong>
+          </div>
+          <div class="col-sm-4 text-center">
+            <a href="{% url 'bucket:bucket' %}">더보기</a>
+          </div>
+        </div>
+        {% for bucket in buckets %}
+        <div class="content mt-2 ">
+          <span style="font-size:75%; margin-top:15px"><code style="font-size:110%;">{{ bucket.owner }}</code>의 버킷리스트</span>
+          <p>{{ bucket.content }}</p>
         </div>
         {% endfor %}
       </div>
     </div>
+
   <br><br><br>
+
 {% endblock %}

@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('hub.urls')),
     path('post/', include('Post.urls')),
     path('photo/', include('photo.urls')),
+    path('bucket/', include('bucket.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', UserCreateView.as_view(), name='register'),

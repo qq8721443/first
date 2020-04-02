@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import DetailView, ListView, TemplateView, CreateView
+from django.views.generic import DetailView, ListView, TemplateView, CreateView, UpdateView
 from .models import Post
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -18,7 +18,7 @@ class PostLV(ListView):
 
 class PostCV(CreateView):
     model = Post
-    template_name = 'Post/post_create.html'
+    template_name = 'Post/post_form.html'
     fields = ['title', 'description', 'context']
     success_url = reverse_lazy('post:post_list')
 
@@ -32,3 +32,8 @@ class PostCV(CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
+
+class PostUV(UpdateView):
+    model = Post
+    fields = ['title', 'description', 'context']
+    success_url = reverse_lazy('post:post_list')

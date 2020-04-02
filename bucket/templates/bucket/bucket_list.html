@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}bucket_list.html{% endblock %}
+
+{% block content %}
+{% for bucket in buckets %}
+<p>{{bucket.owner}}의 버킷리스트</p>
+<p>{{ bucket.title }}</p>
+<p>{{ bucket.content }}</p>
+{% if bucket.owner == user %}
+<button type="button" >수정</button>
+<button type="button" >삭제</button>
+{% else %}
+수정불가
+{% endif %}
+{% endfor %}
+{% endblock %}
