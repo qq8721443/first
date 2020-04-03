@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import bucket_list
+from bucket import views
 
 app_name='bucket'
 urlpatterns =[
-    path('', bucket_list.as_view(), name='bucket')
+    path('', views.bucket_list.as_view(), name='bucket'),
+    path('create/', views.bucketCV.as_view(), name='create'),
+
 ]

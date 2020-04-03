@@ -3,6 +3,19 @@
 {% block title %}main.html
 {% endblock %}
 
+{% block style %}
+.post_content img{
+  display:none;
+}
+div .content{
+  overflow:hidden;
+}
+div .content:hover{
+  background-color:#FFD8D8;
+  opacity:0.8;
+}
+{% endblock %}
+
 {% block content %}
     <div class="row">
       <div class="col-sm text-center">
@@ -30,12 +43,15 @@
             <a href="{% url 'post:post_list' %}">더보기</a>
           </div>
         </div>
-        <div class="content mt-2 mt-2 ">
+        <div class="row">
+
+        <div class="m-2 col-sm border border-dark-50  post_content content mt-2 mt-2" style="height:200px;" onClick="location.href='{{ posts.first.get_absolute_url }}'">
           <p>{{ posts.first }}</p>
           <span>{{ posts.first.owner }}&nbsp;{{ posts.first.create_dt }}</span>
-          <p>{{ posts.first.context|safe }}</p>
+          <p>{{ posts.first.context|truncatewords_html:5|safe}}</p>
 
         </div>
+      </div>
       </div>
 
       <div class="col-sm-4">
@@ -48,11 +64,14 @@
           </div>
 
         </div>
-        <div class="content  mt-2 text-center">
+        <div class="row">
+
+        <div class="col-sm m-2 border border-dark-50 content  mt-2 text-center" style="height:200px;" onClick="location.href='{{ photologs.first.get_absolute_url }}'">
           <p>{{ photologs.first.name }}</p>
           <span>{{ photologs.first.create_dt }}</span>
           <p>{{ photologs.first.content }}</p>
         </div>
+      </div>
       </div>
 
       <div class="col-sm-4">
@@ -64,12 +83,20 @@
             <a href="{% url 'bucket:bucket' %}">더보기</a>
           </div>
         </div>
+        <div class="row">
+          <div class="m-2 col-sm border border-dark-50 content mt-2" style="height:200px;" onClick="location.href='{% url 'bucket:bucket'%}'">
+        {% if buckets %}
         {% for bucket in buckets %}
-        <div class="content mt-2 ">
-          <span style="font-size:75%; margin-top:15px"><code style="font-size:110%;">{{ bucket.owner }}</code>의 버킷리스트</span>
+
+          <span style="font-size:75%; margin-top:15px"><code style="font-size:110%;">{{bucket.create_dt|date:"Y년 M d일"}}&nbsp;{{ bucket.owner }}</code>의 버킷리스트</span>
           <p>{{ bucket.content }}</p>
+
+          {% endfor %}
+        {% else %}
+        없음
+        {% endif %}
         </div>
-        {% endfor %}
+      </div>
       </div>
     </div>
 

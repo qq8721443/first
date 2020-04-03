@@ -6,6 +6,7 @@
 <form class="" action="." method="post">{% csrf_token %}
   정말 삭제하시겠어요? {{ obejct }}<br>
   <input type="submit" class="btn btn-danger" name="" value="확인">
+  <a href="{{object.get_absolute_url}}"><input type="button" class="btn btn-dark" value="취소"></a>
 </form>
 
 {% endblock %}
