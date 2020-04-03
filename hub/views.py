@@ -17,4 +17,5 @@ class pageHub(LoginRequiredMixin,ListView):
             # 모든 책을 쿼리한 집합을 context 객체에 추가한다.
             context['photologs'] = Photolog.objects.all()
             context['posts'] = Post.objects.all()
+            
             return context

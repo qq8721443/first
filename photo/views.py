@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Photo
+from .models import Photo, Photolog
 
 # Create your views here.
 class PhotoLV(ListView):
@@ -18,3 +18,12 @@ class PhotoLV(ListView):
 class PhotoDV(DetailView):
     template_name = 'photo/photo_detail.html'
     model = Photo
+
+class PhotologLV(ListView):
+    template_name = 'photolog_list.html'
+    model = Photolog
+    context_object_name = 'photologs'
+
+class PhotologDV(DetailView):
+    template_name = 'photo/photolog_detail.html'
+    model = Photolog

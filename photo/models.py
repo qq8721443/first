@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from .fields import ThumbnailImageField
 
@@ -9,18 +10,19 @@ class Photolog(models.Model):
     content = models.TextField('Photolog', blank=True)
     create_dt = models.DateTimeField('Create Date', auto_now_add=True)
     modify_dt = models.DateTimeField('Modify Date', auto_now=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='OWNER', null=True, blank=True)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('-create_dt','name',)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('photo:photo_detail', args=(self.id,))
+        return reverse('photo:photolog_detail', args=(self.id,))
 
 class Photo(models.Model):
-    photolog = models.ForeignKey(Photolog, on_delete=models.CASCADE, null=True)
+    photolog = models.ForeignKey(Photolog, on_delete=models.CASCADE, related_name='photos', null=True)
     description = models.TextField('Photo Description', blank=True)
     image = ThumbnailImageField(upload_to='photo/%Y/%m')
     upload_dt = models.DateTimeField('Upload Date', auto_now_add=True)

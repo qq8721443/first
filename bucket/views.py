@@ -12,7 +12,6 @@ class bucket_list(ListView):
 
 class bucketCV(CreateView):
     model = Bucket
-    #template_name = 'Post/post_form.html' 그냥 자동으로 _form.html로 가는듯
     fields = ['title', 'content']
     success_url = reverse_lazy('bucket:bucket')
 

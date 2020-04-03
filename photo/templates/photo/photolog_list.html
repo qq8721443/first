@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}photolog_list.html{% endblock %}
+
+{% block content %}
+
+  <h1 class="display-3">글 목록</h1>
+
+<br>
+  <div class="text-right">
+  <a href="{%url 'post:post_create'%}"><button type="button" class="btn btn-success"><i class="fas fa-edit" ></i>글쓰기</button></a>
+  </div>
+  <div class="row">
+
+
+    <table class="table table-striped">
+      <thead style="background-color:#FFD8D8;">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col-6">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">작성된 시간</th>
+          <th scope="col">수정된 시간</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for photolog in photologs %}
+          <tr style="cursor:pointer" onclick="location.href='{{ photolog.get_absolute_url }}'">
+            <th scope="row">{{ photolog.id }}</th>
+            <td>{{ photolog.name }}</td>
+            <td>{{ photolog.owner }}</td>
+            <td>{{ photolog.create_dt }}</td>
+            <td>{{ photolog.modify_dt }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+
+    </div>
+    <div class="col text-center">
+      {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+        <a href="?page={{ num }}"><button type="button" class="btn btn-primary">{{ num }}</button></a>
+      {% else %}
+        <a href="?page={{ num }}"><button type="button" class="btn btn-secondary">{{ num }}</button></a>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block page_name %}{% endblock %}
