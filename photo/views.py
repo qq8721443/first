@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Photo, Photolog
+from django import forms
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # Create your views here.
 class PhotoLV(ListView):
@@ -27,3 +30,20 @@ class PhotologLV(ListView):
 class PhotologDV(DetailView):
     template_name = 'photo/photolog_detail.html'
     model = Photolog
+
+class PhotologCV(CreateView):
+    model = Photolog
+    template_name = 'photo/photolog_form.html'
+    fields = ['name', 'description', 'content']
+    success_url = reverse_lazy('photo:photolog_list')
+
+    class Meta:
+        widgets = {
+            'name':forms.TextInput(),
+            'description':forms.TextInput(),
+            'content':forms.CharField(widget=CKEditorUploadingWidget()),
+        }
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)

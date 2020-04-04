@@ -6,6 +6,6 @@ urlpatterns = [
     path('', views.PostLV.as_view(), name='post_list'),
     path('create/', views.PostCV.as_view(), name='post_create'),
     re_path(r'^test/(?P<slug>[-\w]+)/$', views.PostDV.as_view(), name='post_detail'),
-    path('post/(?P<pk>[0-9]+)/update/$', views.PostUV.as_view(),name='post_update'),
+    path('<int:pk>/update/', views.PostUV.as_view(),name='post_update'),
     path('<int:pk>/delete/',views.PostDelV.as_view(), name='post_delete'),
 ]

@@ -1,13 +1,15 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 from .fields import ThumbnailImageField
 
 class Photolog(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField('One Line Description', max_length=100, blank=True)
-    content = models.TextField('Photolog', blank=True)
+    content = RichTextUploadingField()
     create_dt = models.DateTimeField('Create Date', auto_now_add=True)
     modify_dt = models.DateTimeField('Modify Date', auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='OWNER', null=True, blank=True)

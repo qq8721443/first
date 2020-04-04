@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}photolog_form.html{% endblock %}
+
+{% block content %}
+<form action="." enctype="multipart/form-data" method="post">{% csrf_token %}
+  {{ form.media }}
+  {{ form.as_p }}
+  <input type="submit" class="btn btn-dark" value="저장">
+</form>
+{% endblock %}
