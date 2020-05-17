@@ -9,12 +9,12 @@
 
 
 <div class="row">
-<div class="col-sm-10 bg-black-50">
+<div class="col-sm bg-black-50 text-center">
   <br>
   <h2>{{ object.name }}</h2>
   <br>
   <div class="row">
-    <div class='col-sm-9 text-black-50'>작성자: {{ object.owner }}&nbsp;&nbsp;&nbsp;작성 :{{ object.create_dt }} / 수정:{{ object.modify_dt }}</div>
+    <div class='col-sm-9 text-black-50 text-left'>작성자: {{ object.owner }}&nbsp;&nbsp;&nbsp;작성 :{{ object.create_dt }} / 수정:{{ object.modify_dt }}</div>
     <div class="col-sm-3">
       {% if object.owner == user %}
       <div class="btn-group" role="group" aria-label="Basic example">
@@ -59,9 +59,6 @@
 </div>
 
 
-<div class="col-sm-2">
-여기에는 약간 다른 메뉴를 넣어볼까 생각중이에요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-</div>
 </div>
 
 

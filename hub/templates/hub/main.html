@@ -1,107 +1,59 @@
 {% extends 'base.html' %}
 
-{% block title %}main.html
-{% endblock %}
+{% block title %}main.html{% endblock %}
 
 {% block style %}
-.post_content img{
-  display:none;
+h2.title{
+  font-weight:bold;
 }
-div .content{
-  overflow:hidden;
-}
-div .content:hover{
-  background-color:#FFD8D8;
-  opacity:0.8;
-}
+
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-      <div class="col-md text-center">
-          <h1 class="display-3 text-black">오늘은
-            <script type="text/javascript">
-            var today = new Date();
-            var dateString = "2016-08-22";
-            var dateArray = dateString.split("-");
-            var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);
-            var betweenDay = (today.getTime() - dateObj.getTime())/1000/60/60/24;
-            betweenDay = Math.floor(betweenDay) + 1;
-            document.write(betweenDay);
-          </script>일째 되는 날입니다!</h1>
+  <div class="row">
+    <div class="col-sm">
+      <div style="margin:1% 15%;" class="content">
+        <p style="font-weight:bold; font-size:130%; color:#808080; cursor:pointer;" onclick="location.href='{% url 'post:post_list' %}'">#post</p>
+        <span>{{ posts.first.owner }}</span>
+        <h2 class="title" onclick="location.href='{{ posts.first.get_absolute_url }}'" style="cursor:pointer;">{{ posts.first }}</h2>
+        <p>{{ posts.first.context|truncatewords_html:20|striptags}}</p>
+        <p style="font-size:80%">{{ posts.first.create_dt }}</p>
       </div>
     </div>
+  </div>
+  <hr width="70%">
+  <div class="row">
+    <div class="col-sm">
+      <div style="margin:1% 15%;" class="">
+        <p style="font-weight:bold; font-size:130%; color:#808080; cursor:pointer;" onclick="location.href='{% url 'photo:photolog_list' %}'">#photo</p>
+        <h2 class="title" onClick="location.href='{{ photologs.first.get_absolute_url }}'" style="cursor:pointer;">{{ photologs.first.name }}</h2>
+        <p>{{ photologs.first.content }}</p>
+        <p style="font-size:80%">총 <code style="font-size:120%;">{{ photologs.first.photos.count }}</code>장의 사진&nbsp;{{ photologs.first.create_dt }}</p>
 
-    <hr>
-
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="row">
-          <div class="col-sm-8">
-            <strong>최신 POST</strong>
-          </div>
-          <div class="col-sm-4 text-center">
-            <a href="{% url 'post:post_list' %}">더보기</a>
-          </div>
-        </div>
-        <div class="row">
-
-        <div class="m-2 col-sm border border-dark-50  post_content content mt-2 mt-2" style="height:200px;" onClick="location.href='{{ posts.first.get_absolute_url }}'">
-          <p>{{ posts.first }}</p>
-          <span>{{ posts.first.owner }}&nbsp;{{ posts.first.create_dt }}</span>
-          <p>{{ posts.first.context|truncatewords_html:5|safe}}</p>
-
-        </div>
       </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="row">
-          <div class="col-sm-8">
-            <strong>최신 PHOTOLOG</strong>
-          </div>
-          <div class="col-sm-4 text-center">
-            <a href="{% url 'photo:photolog_list' %}">더보기</a>
-          </div>
-
-        </div>
+    </div>
+  </div>
+  <hr width="70%">
+  <div class="row">
+    <div class="col-sm">
+      <div style="margin:1% 15%;" class="">
         <div class="row">
 
-        <div class="col-sm m-2 border border-dark-50 content  mt-2 text-center" style="height:200px;" onClick="location.href='{{ photologs.first.get_absolute_url }}'">
-          <p>{{ photologs.first.name }}</p>
-          <span>{{ photologs.first.create_dt }}</span>
-          <p>{{ photologs.first.content }}</p>
-          <span>총 <code style="font-size:120%;">{{ photologs.first.photos.count }}</code>장의 사진</span>
-        </div>
-      </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="row">
-          <div class="col-sm-8">
-            <strong>BUCKETLIST</strong>
-          </div>
-          <div class="col-sm-4 text-center">
-            <a href="{% url 'bucket:bucket' %}">더보기</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="m-2 col-sm border border-dark-50 content mt-2" style="height:200px;" onClick="location.href='{% url 'bucket:bucket'%}'">
         {% if buckets %}
         {% for bucket in buckets %}
+          <div class="col-sm text-center">
+
+
 
           <span style="font-size:75%; margin-top:15px"><code style="font-size:110%;">{{bucket.create_dt|date:"Y년 M d일"}}&nbsp;{{ bucket.owner }}</code>의 버킷리스트</span>
           <p>{{ bucket.content }}</p>
-
+        </div>
           {% endfor %}
         {% else %}
         없음
         {% endif %}
-        </div>
-      </div>
       </div>
     </div>
-
-  <br><br><br>
-
+  </div>
+</div>
 {% endblock %}

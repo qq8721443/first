@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-
 from .fields import ThumbnailImageField
 
 class Photolog(models.Model):

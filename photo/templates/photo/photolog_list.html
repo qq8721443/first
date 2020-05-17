@@ -2,41 +2,33 @@
 
 {% block title %}photolog_list.html{% endblock %}
 
+{% block style %}
+h2.title{
+  font-weight:bold;
+}
+{% endblock %}
 {% block content %}
 
-  <h1 class="display-3">글 목록</h1>
+  <h1 class="display-3" style="font-weight:bold; color:#808080; margin:1% 15%;"># Photos</h1>
 
 <br>
-  <div class="text-right">
-  <a href="{% url 'photo:photolog_create' %}"><button type="button" class="btn btn-success"><i class="fas fa-edit" ></i>글쓰기</button></a>
+  <div class="text-right" style="margin:1% 15%;">
+  <a href="{% url 'photo:photolog_create' %}"><button type="button" class="btn btn-success" style="border-radius:15px;"><i class="fas fa-edit"></i>글쓰기</button></a>
   </div>
-  <div class="row">
 
+    {% for photolog in photologs %}
+    <div class="row">
+      <div class="col-sm">
+        <div style="margin:1% 15%;" class="">
+          <h2 class="title" onClick="location.href='{{ photolog.get_absolute_url }}'" style="cursor:pointer;">{{ photolog.name }}</h2>
+          <p>{{ photolog.content }}</p>
+          <p style="font-size:80%">총 <code style="font-size:120%;">{{ photolog.photos.count }}</code>장의 사진&nbsp;{{ photolog.create_dt }}</p>
 
-    <table class="table table-striped">
-      <thead style="background-color:#FFD8D8;">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col-6">제목</th>
-          <th scope="col">작성자</th>
-          <th scope="col">작성된 시간</th>
-          <th scope="col">수정된 시간</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for photolog in photologs %}
-          <tr style="cursor:pointer" onclick="location.href='{{ photolog.get_absolute_url }}'">
-            <th scope="row">{{ photolog.id }}</th>
-            <td>{{ photolog.name }}</td>
-            <td>{{ photolog.owner }}</td>
-            <td>{{ photolog.create_dt }}</td>
-            <td>{{ photolog.modify_dt }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-
-    </table>
-
+        </div>
+      </div>
+    </div>
+    <hr width=70%>
+    {% endfor %}
 
     </div>
     <div class="col text-center">

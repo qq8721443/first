@@ -1,10 +1,9 @@
 <head>
   <title>{% block title %}{% endblock %}</title>
-  <style>
-  /* a:link {
-                  color: black;
-                  text-decoration: none;
-              }*/
+  <style type="text/css">
+  body {
+    font-family:"malgun godic", 나눔고딕;
+  }
               {% block style %}{% endblock %}
   </style>
 </head>
@@ -51,4 +50,8 @@
     {% block content %}
     {% endblock %}
   </div>
+  <footer style="background-color:#FFD8D8;">
+    <span>여기는 밑공간입니다.</span>
+    <p>룰루랄라</p>
+  </footer>
 </body>

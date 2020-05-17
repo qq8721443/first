@@ -1,43 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}post_list.html{% endblock %}
-
+{% block style %}
+h2.title {
+  font-weight:bold;
+}
+{% endblock %}
 {% block content %}
 
-  <h1 class="display-3">글 목록</h1>
+  <h1 class="display-3" style="font-weight:bold; color:#808080; margin:1% 15%;"># Posts</h1>
 
 <br>
-  <div class="text-right">
-  <a href="{%url 'post:post_create'%}"><button type="button" class="btn btn-success"><i class="fas fa-edit" ></i>글쓰기</button></a>
+  <div class="text-right" style="margin:1% 15%;">
+  <a href="{%url 'post:post_create'%}"><button type="button" class="btn btn-success" style="border-radius:15px;"><i class="fas fa-edit" ></i>글쓰기</button></a>
   </div>
-  <div class="row">
 
 
-    <table class="table table-striped">
-      <thead style="background-color:#FFD8D8;">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col-6">제목</th>
-          <th scope="col">작성자</th>
-          <th scope="col">작성된 시간</th>
-          <th scope="col">수정된 시간</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for post in posts %}
-          <tr style="cursor:pointer" onclick="location.href='{{ post.get_absolute_url }}'">
-            <th scope="row">{{ post.id }}</th>
-            <td>{{ post.title }}</td>
-            <td>{{ post.owner }}</td>
-            <td>{{ post.create_dt }}</td>
-            <td>{{ post.modify_dt }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
 
-    </table>
+    {% for post in posts %}
+    <div class="row">
+      <div class="col-sm">
+        <div style="margin:1% 15%;" class="content">
+          <span>{{ post.owner }}</span>
+          <h2 class="title" onclick="location.href='{{ post.get_absolute_url }}'" style="cursor:pointer;">{{ post.title }}</h2>
+          <p>{{ post.context|truncatewords_html:20|striptags}}</p>
+          <p style="font-size:80%">{{ post.create_dt }}/{{ post.modify_dt }}</p>
+        </div>
+      </div>
+    </div>
+    <hr width=70%>
+    {% endfor %}
 
-
+<!--
     </div>
     <div class="col text-center">
       {% for num in page_obj.paginator.page_range %}
@@ -48,6 +42,7 @@
       {% endif %}
       {% endfor %}
     </div>
+    -->
 
 {% endblock %}
 
